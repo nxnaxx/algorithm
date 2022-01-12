@@ -5,7 +5,7 @@ const n = Number(nAndX[0]);
 const x = Number(nAndX[1]);
 
 const progression = input[1].split(' ');
-let result = '';
+let result = [];
 
 for (let i = 0; i < n; i++) {
   if (Number(progression[i]) < x) {
@@ -14,4 +14,3 @@ for (let i = 0; i < n; i++) {
 }
 
 console.log(result.slice(0, -1));
-//console.log(x);
