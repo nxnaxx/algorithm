@@ -10,8 +10,7 @@ for (let i = 1; i <= testCaseNum; i++) {
   for (let j = 1; j <= num; j++) {
     sum += testCase[j];
   }
-
-  //const average = sum / num;
+  
   testCase.splice(0, 1);
   let topRanks = 0;
 
