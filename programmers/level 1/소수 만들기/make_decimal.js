@@ -13,8 +13,6 @@ function solution(nums) {
   for (let i = 0; i < nums.length - 2; i++) {
     for (let j = i + 1; j < nums.length; j++) {
       for (let k = j + 1; k < nums.length; k++) {
-        //let input = nums[i] + nums[j] + nums[k];
-
         if (isPrime(nums[i] + nums[j] + nums[k])) {
           count++;
         }
