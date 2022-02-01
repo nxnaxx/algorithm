@@ -3,7 +3,6 @@ function solution(N, stages) {
   for (let i = 1; i <= N; i++) {
     let notClearPlayer = 0;
     let clearPlayer = 0;
-    //let currStage = stages.filter(x => x === i);
     stages.map((x) => {
       if (x === i) {
         notClearPlayer++;
