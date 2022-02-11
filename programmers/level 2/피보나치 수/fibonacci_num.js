@@ -1,11 +1,11 @@
 function solution(n) {
-  let firstFibo = 0;
-  let secondFibo = 1;
+  let prevPrevFibo = 0;
+  let prevFibo = 1;
   let result;
   for (let i = 2; i <= n; i++) {
-    result = firstFibo + secondFibo;
-    firstFibo = secondFibo;
-    secondFibo = result;
+    result = (prevPrevFibo % 1234567) + (prevFibo % 1234567);
+    prevPrevFibo = prevFibo;
+    prevFibo = result;
   }
   return result % 1234567;
 }
