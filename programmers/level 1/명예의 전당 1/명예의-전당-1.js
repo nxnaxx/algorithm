@@ -5,18 +5,14 @@ function solution(k, score) {
   score.map((x, i) => {
     if (i < k) {
       hall.push(x);
-      hall.sort((a, b) => b - a);
-      result.push(hall[hall.length - 1]);
     } else {
       hall.sort((a, b) => b - a);
       if (hall[hall.length - 1] < x) {
         hall.pop();
         hall.push(x);
-        result.push(Math.min(...hall));
-      } else {
-        result.push(hall[hall.length - 1]);
       }
     }
+    result.push(Math.min(...hall));
   });
 
   return result;
