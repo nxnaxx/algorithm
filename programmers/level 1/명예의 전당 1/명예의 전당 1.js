@@ -3,9 +3,8 @@ function solution(k, score) {
   let hall = [];
 
   score.map((x, i) => {
-    if (i < k) {
-      hall.push(x);
-    } else {
+    if (i < k) hall.push(x);
+    else {
       hall.sort((a, b) => b - a);
       if (hall[hall.length - 1] < x) {
         hall.pop();
