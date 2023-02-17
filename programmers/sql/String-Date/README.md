@@ -189,3 +189,144 @@
 | SEX_UPON_OUTCOME | VARCHAR(N) |  FALSE   |
 
 입양을 간 동물 중, 보호 기간이 가장 길었던 동물 두 마리의 아이디와 이름을 조회하는 SQL문을 작성해주세요. 이때 결과는 보호 기간이 긴 순으로 조회해야 합니다.
+
+</br>
+
+## 📄 대여 기록이 존재하는 자동차 리스트 구하기
+
+### 문제 설명
+
+다음은 어느 자동차 대여 회사에서 대여 중인 자동차들의 정보를 담은 `CAR_RENTAL_COMPANY_CAR` 테이블과 자동차 대여 기록 정보를 담은 `CAR_RENTAL_COMPANY_RENTAL_HISTORY` 테이블입니다. `CAR_RENTAL_COMPANY_CAR` 테이블은 아래와 같은 구조로 되어있으며, `CAR_ID`, `CAR_TYPE`, `DAILY_FEE`, `OPTIONS` 는 각각 자동차 ID, 자동차 종류, 일일 대여 요금(원), 자동차 옵션 리스트를 나타냅니다.
+
+| Column name |     Type     | Nullable |
+| :---------: | :----------: | :------: |
+|   CAR_ID    |   INTEGER    |  FALSE   |
+|  CAR_TYPE   | VARCHAR(255) |  FALSE   |
+|  DAILY_FEE  |   INTEGER    |  FALSE   |
+|   OPTIONS   | VARCHAR(255) |  FALSE   |
+
+자동차 종류는 '세단', 'SUV', '승합차', '트럭', '리무진' 이 있습니다. 자동차 옵션 리스트는 콤마(',')로 구분된 키워드 리스트(예: '열선시트', '스마트키', '주차감지센서')로 되어있으며, 키워드 종류는 '주차감지센서', '스마트키', '네비게이션', '통풍시트', '열선시트', '후방카메라', '가죽시트' 가 있습니다.
+
+`CAR_RENTAL_COMPANY_RENTAL_HISTORY` 테이블은 아래와 같은 구조로 되어있으며, `HISTORY_ID`, `CAR_ID`, `START_DATE`, `END_DATE` 는 각각 자동차 대여 기록 ID, 자동차 ID, 대여 시작일, 대여 종료일을 나타냅니다.
+
+| Column name |  Type   | Nullable |
+| :---------: | :-----: | :------: |
+| HISTORY_ID  | INTEGER |  FALSE   |
+|   CAR_ID    | INTEGER |  FALSE   |
+| START_DATE  |  DATE   |  FALSE   |
+|  END_DATE   |  DATE   |  FALSE   |
+
+### 문제
+
+`CAR_RENTAL_COMPANY_CAR` 테이블과 `CAR_RENTAL_COMPANY_RENTAL_HISTORY` 테이블에서 자동차 종류가 '세단'인 자동차들 중 10월에 대여를 시작한 기록이 있는 자동차 ID 리스트를 출력하는 SQL문을 작성해주세요. 자동차 ID 리스트는 중복이 없어야 하며, 자동차 ID를 기준으로 내림차순 정렬해주세요.
+
+</br>
+
+## 📋 조건별로 분류하여 주문상태 출력하기
+
+### 문제 설명
+
+다음은 식품공장의 주문정보를 담은 `FOOD_ORDER` 테이블입니다. `FOOD_ORDER` 테이블은 다음과 같으며 `ORDER_ID`, `PRODUCT_ID`, `AMOUNT`, `PRODUCE_DATE`, `IN_DATE`, `OUT_DATE`, `FACTORY_ID`, `WAREHOUSE_ID`는 각각 주문 ID, 제품 ID, 주문양, 생산일자, 입고일자, 출고일자, 공장 ID, 창고 ID를 의미합니다.
+
+| Column name  |    Type     | Nullable |
+| :----------: | :---------: | :------: |
+|   ORDER_ID   | VARCHAR(10) |  FALSE   |
+|  PRODUCT_ID  | VARCHAR(5)  |  FALSE   |
+|    AMOUNT    |   NUMBER    |  FALSE   |
+| PRODUCE_DATE |    DATE     |   TRUE   |
+|   IN_DATE    |    DATE     |   TRUE   |
+|   OUT_DATE   |    DATE     |   TRUE   |
+|  FACTORY_ID  | VARCHAR(10) |  FALSE   |
+| WAREHOUSE_ID | VARCHAR(10) |  FALSE   |
+
+### 문제
+
+`FOOD_ORDER` 테이블에서 5월 1일을 기준으로 주문 ID, 제품 ID, 출고일자, 출고여부를 조회하는 SQL문을 작성해주세요. 출고여부는 5월 1일까지 출고완료로 이 후 날짜는 출고 대기로 미정이면 출고미정으로 출력해주시고, 결과는 주문 ID를 기준으로 오름차순 정렬해주세요.
+
+---
+
+# 🎯 Level 4
+
+## 💵 자동차 대여 기록 별 대여 금액 구하기
+
+### 문제 설명
+
+다음은 어느 자동차 대여 회사에서 대여 중인 자동차들의 정보를 담은 `CAR_RENTAL_COMPANY_CAR` 테이블과 자동차 대여 기록 정보를 담은 `CAR_RENTAL_COMPANY_RENTAL_HISTORY` 테이블과 자동차 종류 별 대여 기간 종류 별 할인 정책 정보를 담은 `CAR_RENTAL_COMPANY_DISCOUNT_PLAN` 테이블 입니다.
+
+`CAR_RENTAL_COMPANY_CAR` 테이블은 아래와 같은 구조로 되어있으며, `CAR_ID`, `CAR_TYPE`, `DAILY_FEE`, `OPTIONS` 는 각각 자동차 ID, 자동차 종류, 일일 대여 요금(원), 자동차 옵션 리스트를 나타냅니다.
+
+| Column name |     Type     | Nullable |
+| :---------: | :----------: | :------: |
+|   CAR_ID    |   INTEGER    |  FALSE   |
+|  CAR_TYPE   | VARCHAR(255) |  FALSE   |
+|  DAILY_FEE  |   INTEGER    |  FALSE   |
+|   OPTIONS   | VARCHAR(255) |  FALSE   |
+
+자동차 종류는 '세단', 'SUV', '승합차', '트럭', '리무진' 이 있습니다. 자동차 옵션 리스트는 콤마(',')로 구분된 키워드 리스트(예: ''열선시트,스마트키,주차감지센서'')로 되어있으며, 키워드 종류는 '주차감지센서', '스마트키', '네비게이션', '통풍시트', '열선시트', '후방카메라', '가죽시트' 가 있습니다.
+
+`CAR_RENTAL_COMPANY_RENTAL_HISTORY` 테이블은 아래와 같은 구조로 되어있으며, `HISTORY_ID`, `CAR_ID`, `START_DATE`, `END_DATE` 는 각각 자동차 대여 기록 ID, 자동차 ID, 대여 시작일, 대여 종료일을 나타냅니다.
+
+| Column name |  Type   | Nullable |
+| :---------: | :-----: | :------: |
+| HISTORY_ID  | INTEGER |  FALSE   |
+|   CAR_ID    | INTEGER |  FALSE   |
+| START_DATE  |  DATE   |  FALSE   |
+|  END_DATE   |  DATE   |  FALSE   |
+
+`CAR_RENTAL_COMPANY_DISCOUNT_PLAN` 테이블은 아래와 같은 구조로 되어있으며, `PLAN_ID`, `CAR_TYPE`, `DURATION_TYPE`, `DISCOUNT_RATE` 는 각각 요금 할인 정책 ID, 자동차 종류, 대여 기간 종류, 할인율(%)을 나타냅니다.
+
+|  Column name  |     Type     | Nullable |
+| :-----------: | :----------: | :------: |
+|    PLAN_ID    |   INTEGER    |  FALSE   |
+|   CAR_TYPE    | VARCHAR(255) |  FALSE   |
+| DURATION_TYPE | VARCHAR(255) |  FALSE   |
+| DISCOUNT_RATE |   INTEGER    |  FALSE   |
+
+할인율이 적용되는 대여 기간 종류로는 '7일 이상' (대여 기간이 7일 이상 30일 미만인 경우), '30일 이상' (대여 기간이 30일 이상 90일 미만인 경우), '90일 이상' (대여 기간이 90일 이상인 경우) 이 있습니다. 대여 기간이 7일 미만인 경우 할인정책이 없습니다.
+
+### 문제
+
+`CAR_RENTAL_COMPANY_CAR` 테이블과 `CAR_RENTAL_COMPANY_RENTAL_HISTORY` 테이블과 `CAR_RENTAL_COMPANY_DISCOUNT_PLAN` 테이블에서 자동차 종류가 '트럭'인 자동차의 대여 기록에 대해서 대여 기록 별로 대여 금액(컬럼명: `FEE`)을 구하여 대여 기록 ID와 대여 금액 리스트를 출력하는 SQL문을 작성해주세요. 결과는 대여 금액을 기준으로 내림차순 정렬하고, 대여 금액이 같은 경우 대여 기록 ID를 기준으로 내림차순 정렬해주세요.
+
+</br>
+
+## 🩺 취소되지 않은 진료 예약 조회하기
+
+### 문제 설명
+
+다음은 환자 정보를 담은 `PATIENT` 테이블과 의사 정보를 담은 `DOCTOR` 테이블, 그리고 진료 예약목록을 담은 `APPOINTMENT`에 대한 테이블입니다. `PATIENT` 테이블은 다음과 같으며 `PT_NO`, `PT_NAME`, `GEND_CD`, `AGE`, `TLNO`는 각각 환자번호, 환자이름, 성별코드, 나이, 전화번호를 의미합니다.
+
+| Column name |    Type    | Nullable |
+| :---------: | :--------: | :------: |
+|    PT_NO    | VARCHAR(N) |  FALSE   |
+|   PT_NAME   | VARCHAR(N) |  FALSE   |
+|   GEND_CD   | VARCHAR(N) |  FALSE   |
+|     AGE     |  INTEGER   |  FALSE   |
+|    TLNO     | VARCHAR(N) |   TRUE   |
+
+`DOCTOR` 테이블은 다음과 같으며 `DR_NAME`, `DR_ID`, `LCNS_NO`, `HIRE_YMD`, `MCDP_CD`, `TLNO`는 각각 의사이름, 의사ID, 면허번호, 고용일자, 진료과코드, 전화번호를 나타냅니다.
+
+| Column name |    Type    | Nullable |
+| :---------: | :--------: | :------: |
+|   DR_NAME   | VARCHAR(N) |  FALSE   |
+|    DR_ID    | VARCHAR(N) |  FALSE   |
+|   LCNS_NO   | VARCHAR(N) |  FALSE   |
+|  HIRE_YMD   |    DATE    |  FALSE   |
+|   MCDP_CD   | VARCHAR(N) |   TRUE   |
+|    TLNO     | VARCHAR(N) |   TRUE   |
+
+`APPOINTMENT` 테이블은 다음과 같으며 `APNT_YMD`, `APNT_NO`, `PT_NO`, `MCDP_CD`, `MDDR_ID`, `APNT_CNCL_YN`, `APNT_CNCL_YMD`는 각각 진료 예약일시, 진료예약번호, 환자번호, 진료과코드, 의사ID, 예약취소여부, 예약취소날짜를 나타냅니다.
+
+|  Column name  |    Type    | Nullable |
+| :-----------: | :--------: | :------: |
+|   APNT_YMD    | TIMESTAMP  |  FALSE   |
+|    APNT_NO    |  INTEGER   |  FALSE   |
+|     PT_NO     | VARCHAR(N) |  FALSE   |
+|    MCDP_CD    | VARCHAR(N) |  FALSE   |
+|    MDDR_ID    | VARCHAR(N) |  FALSE   |
+| APNT_CNCL_YN  | VARCHAR(N) |   TRUE   |
+| APNT_CNCL_YMD |    DATE    |   TRUE   |
+
+### 문제
+
+`PATIENT`, `DOCTOR` 그리고 `APPOINTMENT` 테이블에서 2022년 4월 13일 취소되지 않은 흉부외과(CS) 진료 예약 내역을 조회하는 SQL문을 작성해주세요. 진료예약번호, 환자이름, 환자번호, 진료과코드, 의사이름, 진료예약일시 항목이 출력되도록 작성해주세요. 결과는 진료예약일시를 기준으로 오름차순 정렬해주세요.
