@@ -159,6 +159,29 @@
 
 `CAR_RENTAL_COMPANY_RENTAL_HISTORY` 테이블에서 평균 대여 기간이 7일 이상인 자동차들의 자동차 ID와 평균 대여 기간(컬럼명: `AVERAGE_DURATION`) 리스트를 출력하는 SQL문을 작성해주세요. 평균 대여 기간은 소수점 두번째 자리에서 반올림하고, 결과는 평균 대여 기간을 기준으로 내림차순 정렬해주시고, 평균 대여 기간이 같으면 자동차 ID를 기준으로 내림차순 정렬해주세요.
 
+</br>
+
+## 조건에 부합하는 중고거래 상태 조회하기
+
+### 문제 설명
+
+다음은 중고거래 게시판 정보를 담은 `USED_GOODS_BOARD` 테이블입니다. `USED_GOODS_BOARD` 테이블은 다음과 같으며 `BOARD_ID`, `WRITER_ID`, `TITLE`, `CONTENTS`, `PRICE`, `CREATED_DATE`, `STATUS`, `VIEWS`은 게시글 ID, 작성자 ID, 게시글 제목, 게시글 내용, 가격, 작성일, 거래상태, 조회수를 의미합니다.
+
+| Column name  |     Type      | Nullable |
+| :----------: | :-----------: | :------: |
+|   BOARD_ID   |  VARCHAR(5)   |  FALSE   |
+|  WRITER_ID   |  VARCHAR(50)  |  FALSE   |
+|    TITLE     | VARCHAR(100)  |  FALSE   |
+|   CONTENTS   | VARCHAR(1000) |  FALSE   |
+|    PRICE     |    NUMBER     |  FALSE   |
+| CREATED_DATE |     DATE      |  FALSE   |
+|    STATUS    |  VARCHAR(10)  |  FALSE   |
+|    VIEWS     |    NUMBER     |  FALSE   |
+
+### 문제
+
+`USED_GOODS_BOARD` 테이블에서 2022년 10월 5일에 등록된 중고거래 게시물의 게시글 ID, 작성자 ID, 게시글 제목, 가격, 거래상태를 조회하는 SQL문을 작성해주세요. 거래상태가 SALE 이면 판매중, RESERVED이면 예약중, DONE이면 거래완료 분류하여 출력해주시고, 결과는 게시글 ID를 기준으로 내림차순 정렬해주세요.
+
 ---
 
 # 🎯 Level 3
@@ -242,6 +265,72 @@
 ### 문제
 
 `FOOD_ORDER` 테이블에서 5월 1일을 기준으로 주문 ID, 제품 ID, 출고일자, 출고여부를 조회하는 SQL문을 작성해주세요. 출고여부는 5월 1일까지 출고완료로 이 후 날짜는 출고 대기로 미정이면 출고미정으로 출력해주시고, 결과는 주문 ID를 기준으로 오름차순 정렬해주세요.
+
+</br>
+
+## 조회수가 가장 많은 중고거래 게시판의 첨부파일 조회하기
+
+### 문제 설명
+
+다음은 중고거래 게시판 정보를 담은 `USED_GOODS_BOARD` 테이블과 중고거래 게시판 첨부파일 정보를 담은 `USED_GOODS_FILE` 테이블입니다. `USED_GOODS_BOARD` 테이블은 다음과 같으며 `BOARD_ID`, `WRITER_ID`, `TITLE`, `CONTENTS`, `PRICE`, `CREATED_DATE`, `STATUS`, `VIEWS`은 게시글 ID, 작성자 ID, 게시글 제목, 게시글 내용, 가격, 작성일, 거래상태, 조회수를 의미합니다.
+
+| Column name  |     Type      | Nullable |
+| :----------: | :-----------: | :------: |
+|   BOARD_ID   |  VARCHAR(5)   |  FALSE   |
+|  WRITER_ID   |  VARCHAR(50)  |  FALSE   |
+|    TITLE     | VARCHAR(100)  |  FALSE   |
+|   CONTENTS   | VARCHAR(1000) |  FALSE   |
+|    PRICE     |    NUMBER     |  FALSE   |
+| CREATED_DATE |     DATE      |  FALSE   |
+|    STATUS    |  VARCHAR(10)  |  FALSE   |
+|    VIEWS     |    NUMBER     |  FALSE   |
+
+`USED_GOODS_FILE` 테이블은 다음과 같으며 `FILE_ID`, `FILE_EXT`, `FILE_NAME`, `BOARD_ID`는 각각 파일 ID, 파일 확장자, 파일 이름, 게시글 ID를 의미합니다.
+
+| Column name |     Type     | Nullable |
+| :---------: | :----------: | :------: |
+|   FILE_ID   | VARCHAR(10)  |  FALSE   |
+|  FILE_EXT   |  VARCHAR(5)  |  FALSE   |
+|  FILE_NAME  | VARCHAR(256) |  FALSE   |
+|  BOARD_ID   | VARCHAR(10)  |  FALSE   |
+
+### 문제
+
+`USED_GOODS_BOARD`와 `USED_GOODS_FILE` 테이블에서 조회수가 가장 높은 중고거래 게시물에 대한 첨부파일 경로를 조회하는 SQL문을 작성해주세요. 첨부파일 경로는 FILE ID를 기준으로 내림차순 정렬해주세요. 기본적인 파일경로는 /home/grep/src/ 이며, 게시글 ID를 기준으로 디렉토리가 구분되고, 파일이름은 파일 ID, 파일 이름, 파일 확장자로 구성되도록 출력해주세요. 조회수가 가장 높은 게시물은 하나만 존재합니다.
+
+</br>
+
+## 조건에 맞는 사용자와 총 거래금액 조회하기
+
+### 문제 설명
+
+다음은 중고 거래 게시판 정보를 담은 `USED_GOODS_BOARD` 테이블과 중고 거래 게시판 첨부파일 정보를 담은 `USED_GOODS_FILE` 테이블입니다. `USED_GOODS_BOARD` 테이블은 다음과 같으며 `BOARD_ID`, `WRITER_ID`, `TITLE`, `CONTENTS`, `PRICE`, `CREATED_DATE`, `STATUS`, `VIEWS`는 게시글 ID, 작성자 ID, 게시글 제목, 게시글 내용, 가격, 작성일, 거래상태, 조회수를 의미합니다.
+
+| Column name  |     Type      | Nullable |
+| :----------: | :-----------: | :------: |
+|   BOARD_ID   |  VARCHAR(5)   |  FALSE   |
+|  WRITER_ID   |  VARCHAR(50)  |  FALSE   |
+|    TITLE     | VARCHAR(100)  |  FALSE   |
+|   CONTENTS   | VARCHAR(1000) |  FALSE   |
+|    PRICE     |    NUMBER     |  FALSE   |
+| CREATED_DATE |     DATE      |  FALSE   |
+|    STATUS    |  VARCHAR(10)  |  FALSE   |
+|    VIEWS     |    NUMBER     |  FALSE   |
+
+`USED_GOODS_USER` 테이블은 다음과 같으며 `USER_ID`, `NICKNAME`, `CITY`, `STREET_ADDRESS1`, `STREET_ADDRESS2`, `TLNO`는 각각 회원 ID, 닉네임, 시, 도로명 주소, 상세 주소, 전화번호를 의미합니다.
+
+|   Column name   |     Type     | Nullable |
+| :-------------: | :----------: | :------: |
+|     USER_ID     | VARCHAR(50)  |  FALSE   |
+|    NICKANME     | VARCHAR(100) |  FALSE   |
+|      CITY       | VARCHAR(100) |  FALSE   |
+| STREET_ADDRESS1 | VARCHAR(100) |  FALSE   |
+| STREET_ADDRESS2 | VARCHAR(100) |   TRUE   |
+|      TLNO       | VARCHAR(20)  |  FALSE   |
+
+### 문제
+
+`USED_GOODS_BOARD`와 `USED_GOODS_USER` 테이블에서 중고 거래 게시물을 3건 이상 등록한 사용자의 사용자 ID, 닉네임, 전체주소, 전화번호를 조회하는 SQL문을 작성해주세요. 이때, 전체 주소는 시, 도로명 주소, 상세 주소가 함께 출력되도록 해주시고, 전화번호의 경우 xxx-xxxx-xxxx 같은 형태로 하이픈 문자열(`-`)을 삽입하여 출력해주세요. 결과는 회원 ID를 기준으로 내림차순 정렬해주세요.
 
 ---
 
