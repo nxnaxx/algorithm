@@ -1,6 +1,6 @@
 function solution(m, n, startX, startY, balls) {
   let result = [];
-  const comparativePoint = [
+  const symmetricalPoint = [
     [-startX, startY],
     [startX + (m - startX) * 2, startY],
     [startX, -startY],
@@ -9,10 +9,14 @@ function solution(m, n, startX, startY, balls) {
   let num, verticalDistance;
 
   const compareDistance = (num, i, verticalDistance) => {
-    const distance =
-      (comparativePoint[num][0] - balls[i][0]) ** 2 +
-      (comparativePoint[num][1] - balls[i][1]) ** 2;
-    result.push(distance < verticalDistance ? distance : verticalDistance);
+    const symmetricalDistance =
+      (symmetricalPoint[num][0] - balls[i][0]) ** 2 +
+      (symmetricalPoint[num][1] - balls[i][1]) ** 2;
+    result.push(
+      symmetricalDistance < verticalDistance
+        ? symmetricalDistance
+        : verticalDistance,
+    );
   };
 
   for (let i = 0; i < balls.length; i++) {
@@ -37,7 +41,7 @@ function solution(m, n, startX, startY, balls) {
       continue;
     }
 
-    comparativePoint.map((x) => {
+    symmetricalPoint.map((x) => {
       let currentDistance =
         (x[0] - balls[i][0]) ** 2 + (x[1] - balls[i][1]) ** 2;
       minDistance =
