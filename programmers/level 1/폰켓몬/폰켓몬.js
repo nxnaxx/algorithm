@@ -1,6 +1,6 @@
 function solution(nums) {
-  const set = new Set(nums);
-  return [...set].length >= nums.length / 2 ? nums.length / 2 : [...set].length;
+  const pokemon = new Set(nums);
+  return pokemon.size < nums.length / 2 ? pokemon.size : nums.length / 2;
 }
 
 console.log(solution([3, 1, 2, 3]));
