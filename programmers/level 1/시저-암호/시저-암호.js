@@ -1,12 +1,12 @@
 function solution(s, n) {
   return s
     .split('')
-    .map((e) => {
-      if (e === ' ') {
-        return e;
+    .map((x) => {
+      if (x === ' ') {
+        return x;
       }
-      const uni = e.charCodeAt();
-      return e.toUpperCase().charCodeAt() + n > 90
+      const uni = x.charCodeAt();
+      return x.toUpperCase().charCodeAt() + n > 90
         ? String.fromCharCode(uni + n - 26)
         : String.fromCharCode(uni + n);
     })
