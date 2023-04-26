@@ -6,7 +6,6 @@ function solution(word) {
     O: 3,
     U: 4,
   };
-
   const arr = [781, 156, 31, 6, 1];
   let result = 0;
 

@@ -7,6 +7,8 @@ function solution(w, h) {
     a = b;
     b = c;
   }
+
   return w * h - (w + h - a);
 }
+
 console.log(solution(8, 12));
