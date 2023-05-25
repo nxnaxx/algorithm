@@ -27,8 +27,6 @@ function solution(n, k) {
     people.splice(index, 1);
     remain = remain % start;
   }
-
-  return result;
 }
 
 console.log(solution(3, 5));
