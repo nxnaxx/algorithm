@@ -1,13 +1,9 @@
 function solution(x, n) {
-  let result = [];
-
-  for (let i = 1; i <= n; i++) {
-    result.push(x * i);
-  }
-
-  return result;
+  return Array.from({ length: n })
+    .fill(x)
+    .map((el, i) => el + x * i);
 }
 
-console.log(solution(2, 5));
-console.log(solution(4, 3));
-console.log(solution(-4, 2));
+console.log(solution(2, 5)); // [2, 4, 6, 8, 10]
+console.log(solution(4, 3)); // [4, 8, 12]
+console.log(solution(-4, 2)); // [-4, -8]

@@ -1,17 +1,17 @@
 function solution(nums) {
   let result = 0;
-
-  const isPrime = (num) => {
-    for (let i = 2; i <= Math.floor(Math.sqrt(num)); i++) {
-      if (num % i === 0) return false;
+  const isPrimeNum = (num) => {
+    if (num % 2 === 0 || Number.isInteger(Math.sqrt(num))) return 0;
+    for (let i = 2; i <= Math.sqrt(num); i++) {
+      if (num % i === 0) return 0;
     }
-    return true;
+    return 1;
   };
 
-  for (let i = 0; i < nums.length - 2; i++) {
+  for (let i = 0; i < nums.length; i++) {
     for (let j = i + 1; j < nums.length; j++) {
       for (let k = j + 1; k < nums.length; k++) {
-        if (isPrime(nums[i] + nums[j] + nums[k])) result++;
+        result += isPrimeNum(nums[i] + nums[j] + nums[k]);
       }
     }
   }
@@ -19,5 +19,5 @@ function solution(nums) {
   return result;
 }
 
-console.log(solution([1, 2, 3, 4]));
-console.log(solution([1, 2, 7, 6, 4]));
+console.log(solution([1, 2, 3, 4])); // 1
+console.log(solution([1, 2, 7, 6, 4])); // 4

@@ -1,16 +1,13 @@
 function solution(s, n) {
-  return s
-    .split('')
-    .map((x) => {
-      if (x === ' ') {
-        return x;
-      }
-      const uni = x.charCodeAt();
-      return x.toUpperCase().charCodeAt() + n > 90
-        ? String.fromCharCode(uni + n - 26)
-        : String.fromCharCode(uni + n);
-    })
-    .join('');
+  const result = s.split('').map((x) => {
+    if (x.charCodeAt() === 32) return x;
+
+    let ascii = x.charCodeAt() + n;
+    if (x.toUpperCase().charCodeAt() + n > 90) ascii -= 26;
+
+    return String.fromCharCode(ascii);
+  });
+  return result.join('');
 }
 
 console.log(solution('AB', 1));
