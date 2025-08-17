@@ -1,25 +1,15 @@
 function solution(n, lost, reserve) {
-  let student = [];
-  lost.sort();
-  reserve.sort();
-  let copyLost = lost.slice();
+  const lostSet = new Set(lost.filter((x) => !reserve.includes(x)).sort());
+  const reserveSet = new Set(reserve.filter((x) => !lost.includes(x)).sort());
 
-  lost.map((x) => {
-    if (reserve.includes(x)) {
-      copyLost.splice(copyLost.indexOf(x), 1);
-      reserve.splice(reserve.indexOf(x), 1);
-    }
+  reserveSet.forEach((x) => {
+    if (lostSet.has(x - 1)) lostSet.delete(x - 1);
+    else if (lostSet.has(x + 1)) lostSet.delete(x + 1);
   });
 
-  copyLost.map((x) => {
-    if (reserve.includes(x - 1)) reserve.splice(reserve.indexOf(x - 1), 1);
-    else if (reserve.includes(x + 1)) reserve.splice(reserve.indexOf(x + 1), 1);
-    else student.push(x);
-  });
-
-  return n - student.length;
+  return n - lostSet.size;
 }
 
-console.log(solution(5, [2, 4], [1, 3, 5]));
-console.log(solution(5, [2, 4], [3]));
-console.log(solution(3, [3], [1]));
+console.log(solution(5, [2, 4], [1, 3, 5])); // 5
+console.log(solution(5, [2, 4], [3])); // 4
+console.log(solution(3, [3], [1])); // 2

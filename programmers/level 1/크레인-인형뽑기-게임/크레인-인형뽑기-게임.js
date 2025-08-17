@@ -1,24 +1,27 @@
 function solution(board, moves) {
-  let basket = [];
+  const newBoard = Array.from({ length: board[0].length }, () => []);
+  const basket = [];
   let result = 0;
 
-  moves.map((num) => {
-    for (let i = 0; i < board.length; i++) {
-      if (board[i][num - 1] !== 0) {
-        basket.push(board[i][num - 1]);
-        board[i].splice(num - 1, 1, 0);
-        return;
-      }
-    }
+  board.reverse().forEach((row) => {
+    row.forEach((x, i) => {
+      if (x === 0) return;
+      newBoard[i].push(x);
+    });
   });
 
-  for (let i = 0; i < basket.length; i++) {
-    if (basket[i] === basket[i - 1]) {
-      basket.splice(i - 1, 2);
+  moves.forEach((move) => {
+    const doll = newBoard[move - 1].pop();
+    if (!doll) return;
+
+    if (basket[basket.length - 1] === doll) {
+      basket.pop();
       result += 2;
-      i -= 2;
+      return;
     }
-  }
+
+    basket.push(doll);
+  });
 
   return result;
 }
@@ -34,4 +37,4 @@ console.log(
     ],
     [1, 5, 3, 5, 1, 2, 1, 4],
   ),
-);
+); // 4

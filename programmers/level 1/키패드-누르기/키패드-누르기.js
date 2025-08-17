@@ -1,68 +1,59 @@
 function solution(numbers, hand) {
-  let keypad = {
-    1: [1, 1],
-    2: [1, 2],
-    3: [1, 3],
-    4: [2, 1],
-    5: [2, 2],
-    6: [2, 3],
-    7: [3, 1],
-    8: [3, 2],
-    9: [3, 3],
-    '*': [4, 1],
-    0: [4, 2],
-    '#': [4, 3],
+  const keypad = {
+    1: [1, 0],
+    2: [2, 0],
+    3: [3, 0],
+    4: [1, 1],
+    5: [2, 1],
+    6: [3, 1],
+    7: [1, 2],
+    8: [2, 2],
+    9: [3, 2],
+    '*': [1, 3],
+    0: [2, 3],
+    '#': [3, 3],
   };
-  let leftHand = '*';
-  let rightHand = '#';
+  let leftThumb = keypad['*'];
+  let rightThumb = keypad['#'];
   let result = '';
 
-  for (let i = 0; i < numbers.length; i++) {
-    let currNum = numbers[i];
-    let currIndex = keypad[currNum];
+  const useLeft = (key) => {
+    result += 'L';
+    leftThumb = key;
+  };
 
-    const useLeft = () => {
-      result += 'L';
-      leftHand = currNum;
-    };
+  const useRight = (key) => {
+    result += 'R';
+    rightThumb = key;
+  };
 
-    const useRight = () => {
-      result += 'R';
-      rightHand = currNum;
-    };
+  numbers.forEach((number) => {
+    const currentKey = keypad[number];
+    let choice = 'L';
 
-    if (currIndex[1] === 1) {
-      useLeft();
-      continue;
+    if (currentKey[0] === 1) return useLeft(currentKey);
+    if (currentKey[0] === 3) return useRight(currentKey);
+
+    const leftMoveCount =
+      Math.abs(currentKey[0] - leftThumb[0]) +
+      Math.abs(currentKey[1] - leftThumb[1]);
+    const rightMoveCount =
+      Math.abs(currentKey[0] - rightThumb[0]) +
+      Math.abs(currentKey[1] - rightThumb[1]);
+
+    if (
+      (leftMoveCount === rightMoveCount && hand === 'right') ||
+      leftMoveCount > rightMoveCount
+    ) {
+      choice = 'R';
     }
-    if (currIndex[1] === 3) {
-      useRight();
-      continue;
-    }
 
-    let leftIndex = keypad[leftHand];
-    let rightIndex = keypad[rightHand];
-    let leftDistance =
-      Math.abs(currIndex[0] - leftIndex[0]) +
-      Math.abs(currIndex[1] - leftIndex[1]);
-    let rightDistance =
-      Math.abs(currIndex[0] - rightIndex[0]) +
-      Math.abs(currIndex[1] - rightIndex[1]);
-
-    if (leftDistance < rightDistance) {
-      useLeft();
-      continue;
-    }
-    if (leftDistance > rightDistance) {
-      useRight();
-      continue;
-    }
-    hand === 'left' ? useLeft() : useRight();
-  }
+    choice === 'L' ? useLeft(currentKey) : useRight(currentKey);
+  });
 
   return result;
 }
 
-console.log(solution([1, 3, 4, 5, 8, 2, 1, 4, 5, 9, 5], 'right'));
-console.log(solution([7, 0, 8, 2, 8, 3, 1, 5, 7, 6, 2], 'left'));
-console.log(solution([1, 2, 3, 4, 5, 6, 7, 8, 9, 0], 'right'));
+console.log(solution([1, 3, 4, 5, 8, 2, 1, 4, 5, 9, 5], 'right')); // "LRLLLRLLRRL"
+console.log(solution([7, 0, 8, 2, 8, 3, 1, 5, 7, 6, 2], 'left')); // "LRLLRRLLLRR"
+console.log(solution([1, 2, 3, 4, 5, 6, 7, 8, 9, 0], 'right')); // "LLRLLRLLRL"

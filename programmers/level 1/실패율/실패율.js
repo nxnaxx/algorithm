@@ -1,21 +1,17 @@
 function solution(N, stages) {
-  let result = [];
+  const challengers = Array.from({ length: N + 1 }).fill(0);
+  let remainder = stages.length;
+  const result = [];
 
-  for (let i = 1; i <= N; i++) {
-    let notClearPlayer = 0;
-    let clearPlayer = 0;
+  stages.forEach((stage) => challengers[stage - 1]++);
+  challengers.forEach((challenger, i) => {
+    result.push([i + 1, challenger / remainder]);
+    remainder -= challenger;
+  });
 
-    stages.map((x) => {
-      if (x === i) notClearPlayer++;
-      if (x > i) clearPlayer++;
-    });
-    result.push([i, notClearPlayer / clearPlayer]);
-  }
-
-  result.sort((a, b) => b[1] - a[1]);
-
-  return result.map((x) => x[0]);
+  result.pop();
+  return result.sort((a, b) => b[1] - a[1]).map((x) => x[0]);
 }
 
-console.log(solution(5, [2, 1, 2, 6, 2, 4, 3, 3]));
-console.log(solution(4, [4, 4, 4, 4, 4]));
+console.log(solution(5, [2, 1, 2, 6, 2, 4, 3, 3])); // [3, 4, 2, 1, 5]
+console.log(solution(4, [4, 4, 4, 4, 4])); // [4, 1, 2, 3]
