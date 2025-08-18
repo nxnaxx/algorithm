@@ -1,13 +1,6 @@
 function solution(n) {
-  let result = [];
-
-  while (n > 0) {
-    result.push(parseInt(n % 3));
-    n = parseInt(n / 3);
-  }
-
-  return parseInt(result.join(''), 3);
+  return parseInt([...n.toString(3)].reverse().join(''), 3);
 }
 
-console.log(solution(45));
-console.log(solution(125));
+console.log(solution(45)); // 7
+console.log(solution(125)); // 229

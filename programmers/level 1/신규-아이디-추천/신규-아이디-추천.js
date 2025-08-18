@@ -1,26 +1,20 @@
 function solution(new_id) {
   let result = new_id
     .toLowerCase()
-    .replace(/[^.\-_a-z0-9]/g, '')
+    .replace(/[^a-z0-9_.-]/g, '')
     .replace(/\.{2,}/g, '.')
-    .replace(/^[\.]|[\.]$/g, '')
+    .replace(/^\.+|\.+$/g, '')
     .replace(/^$/, 'a')
     .slice(0, 15)
-    .replace(/\.$/, '');
+    .replace(/\.+$/, '');
+  const len = result.length;
 
-  if (result.length <= 2) {
-    let addStr = result.slice(-1);
-
-    for (let i = result.length; i < 3; i++) {
-      result += addStr;
-    }
-  }
-
+  if (len <= 2) result += result[len - 1].repeat(3 - len);
   return result;
 }
 
-console.log(solution('...!@BaT#*..y.abcdefghijklm'));
-console.log(solution('z-+.^.'));
-console.log(solution('=.='));
-console.log(solution('123_.def'));
-console.log(solution('abcdefghijklmn.p'));
+console.log(solution('...!@BaT#*..y.abcdefghijklm')); // "bat.y.abcdefghi"
+console.log(solution('z-+.^.')); // "z--"
+console.log(solution('=.=')); // "aaa"
+console.log(solution('123_.def')); // "123_.def"
+console.log(solution('abcdefghijklmn.p')); // "abcdefghijklmn"
